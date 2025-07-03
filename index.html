@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$GLORY - SOL Reflections. No Utility. Just GLORY.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Barlow', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa;
+        }
+        
+        .hero-bg {
+            background: 
+                linear-gradient(135deg, rgba(26,35,126,0.9) 0%, rgba(183,28,28,0.9) 50%, rgba(255,255,255,0.9) 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="50" height="50" x="0" y="0" fill="%23b71c1c"/><rect width="50" height="50" x="50" y="0" fill="%23ffffff"/><rect width="50" height="50" x="0" y="50" fill="%23ffffff"/><rect width="50" height="50" x="50" y="50" fill="%231a237e"/></svg>');
+            background-size: 200% 200%, 100px 100px;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .firework {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px 3px;
+            animation: firework 1.5s ease-out infinite;
+            opacity: 0;
+            filter: drop-shadow(0 0 5px currentColor);
+        }
+        
+        @keyframes firework {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            50% { transform: translate(var(--tx), var(--ty)) scale(1.5); }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #092354;
+            opacity: 0.8;
+            animation: float 10s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+        }
+        
+        .balloon:hover {
+            transform: scale(1.2) !important;
+        }
+        
+        .balloon:before {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 20px;
+            background-color: #092354;
+            bottom: -20px;
+            left: 27px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(var(--start-x), var(--start-y)) rotate(5deg); }
+            50% { transform: translate(var(--mid-x), var(--mid-y)) rotate(-5deg); }
+        }
+        
+        .section-divider {
+            height: 100px;
+            background: linear-gradient(90deg, #b71c1c, #1a237e);
+            clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
+        }
+        
+        .tokenomics-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #b71c1c 0% 60%,
+                #1a237e 60% 90%,
+                #000000 90% 100%
+            );
+        }
+        
+        .flag-stripe {
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg,
+                #b71c1c,
+                #b71c1c 20px,
+                #ffffff 20px,
+                #ffffff 40px,
+                #1a237e 40px,
+                #1a237e 60px
+            );
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="relative overflow-x-hidden">
+    <!-- Fireworks Background Elements -->
+    <div id="fireworks-container" class="fixed inset-0 pointer-events-none z-0"></div>
+    <div id="balloons-container" class="fixed inset-0 pointer-events-none z-0"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex flex-col items-center justify-center relative overflow-hidden text-white">
+        <div class="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
+        <div class="relative z-20 text-center px-4">
+            <img src="https://i.ibb.co/nswp2wnX/Picsart-25-07-03-13-31-22-891.png" alt="$GLORY Logo" class="mx-auto w-48 md:w-64 mb-8 pulse">
+            <h1 class="text-4xl md:text-6xl font-bold uppercase mb-4 tracking-wider">SOL Reflections. No Utility. Just GLORY.</h1>
+            <p class="text-xl md:text-2xl mb-8 font-semibold">This July 4th, freedom rides the Solana chain.</p>
+            <a href="https://t.me/ReflectionsAndGlory" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full text-lg uppercase tracking-wider inline-block transform transition duration-300 hover:scale-105 shadow-lg">
+                Join the Revolution
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-0 right-0 text-center z-20 animate-bounce">
+            <p class="text-white mb-2">Explore $GLORY</p>
+            <i class="fas fa-chevron-down text-white text-2xl"></i>
+        </div>
+    </section>
+    
+    <div class="section-divider"></div>
+    
+    <!-- About Section -->
+    <section class="py-20 px-4 md:px-8 bg-white bg-opacity-90" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"20\" y=\"0\" fill=\"%23b71c1c\"/><rect width=\"100\" height=\"20\" y=\"20\" fill=\"%23ffffff\"/><rect width=\"100\" height=\"20\" y=\"40\" fill=\"%231a237e\"/><rect width=\"100\" height=\"20\" y=\"60\" fill=\"%23ffffff\"/></svg>');">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 uppercase text-gray-800">What is $GLORY?</h2>
+            <div class="bg-blue-50 p-8 rounded-xl border-l-8 border-red-600">
+                <p class="text-lg md:text-xl text-gray-700 mb-6">
+                    <span class="font-bold text-red-600">$GLORY</span> is a RevShare-powered Solana token that rewards holders with <span class="font-bold text-blue-600">$SOL every 30 minutes</span> — no staking, no claiming, no fluff. Every buy and sell feeds a distribution wallet that pays out in Solana automatically.
+                </p>
+                <p class="text-lg md:text-xl text-gray-700">
+                    This isn't just a coin. It's a declaration. A call to arms. A digital rebellion. You don't farm $GLORY — you hold it, you earn it, you reflect it.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <div class="flag-stripe"></div>
+    
+    <!-- Why GLORY Section -->
+    <section class="py-20 px-4 md:px-8 bg-gray-100">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 uppercase text-gray-800">🔥 Why $GLORY?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
+                    <div class="bg-red-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-bolt text-red-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-gray-800">7/7 Tax</h3>
+                        <p class="text-gray-600">Balanced and aggressive</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-coins text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-gray-800">SOL Reflections</h3>
+                        <p class="text-gray-600">Real yield, no inflation</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
+                    <div class="bg-red-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-brain text-red-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-gray-800">Simple Mechanics</h3>
+                        <p class="text-gray-600">No games, no lottery, just clean revenue-sharing</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-fire text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-gray-800">Launched on July 4th</h3>
+                        <p class="text-gray-600">Symbolic timing, maximum hype</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start md:col-span-2">
+                    <div class="bg-red-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-users text-red-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-gray-800">Made for the People</h3>
+                        <p class="text-gray-600">Memers, degens, and trenchers welcome</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="flag-stripe"></div>
+    
+    <!-- Tokenomics Section -->
+    <section class="py-20 px-4 md:px-8 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 uppercase text-gray-800">⚙️ Tokenomics</h2>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div class="flex-1">
+                    <div class="tokenomics-chart mx-auto mb-8"></div>
+                </div>
+                <div class="flex-1">
+                    <p class="text-lg md:text-xl text-gray-700 mb-6">
+                        Every trade has a <span class="font-bold text-red-600">7% tax</span> split:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="bg-red-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4">60%</div>
+                            <div>
+                                <p class="font-bold text-gray-800">Auto-distributed to $GLORY holders in $SOL</p>
+                                <p class="text-gray-600">Real yield directly to your wallet</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-blue-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4">30%</div>
+                            <div>
+                                <p class="font-bold text-gray-800">Dev / Marketing / Growth</p>
+                                <p class="text-gray-600">Fueling the revolution</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-black text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4">10%</div>
+                            <div>
+                                <p class="font-bold text-gray-800">Burned forever</p>
+                                <p class="text-gray-600">A tribute to the cause</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="section-divider"></div>
+    
+    <!-- Reflections Mechanism -->
+    <section class="py-20 px-4 md:px-8 bg-blue-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 uppercase text-gray-800">🔄 Reflections in $SOL</h2>
+            <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+                <p class="text-xl md:text-2xl text-gray-700 mb-6">
+                    Rewards are sent <span class="font-bold text-blue-600">every 30 minutes</span> straight to your wallet.
+                </p>
+                <p class="text-xl md:text-2xl text-gray-700 font-bold">
+                    No staking. No claiming. No waiting.
+                </p>
+                <div class="mt-8 p-4 bg-blue-100 rounded-lg inline-block">
+                    <p class="text-2xl font-bold text-blue-800">
+                        Hold $GLORY. Earn $SOL. That's it.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="flag-stripe"></div>
+    
+    <!-- Launch Details -->
+    <section class="py-20 px-4 md:px-8 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 uppercase text-gray-800">🚨 Launch Info</h2>
+            <div class="bg-red-50 border-2 border-red-600 rounded-xl p-8 max-w-2xl mx-auto">
+                <ul class="space-y-4 text-lg">
+                    <li class="flex items-center">
+                        <i class="fas fa-calendar-day text-red-600 mr-4 text-xl"></i>
+                        <span class="font-bold mr-2">Launch Date:</span> July 4th, 2PM UTC
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-link text-red-600 mr-4 text-xl"></i>
+                        <span class="font-bold mr-2">Chain:</span> Solana
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-cubes text-red-600 mr-4 text-xl"></i>
+                        <span class="font-bold mr-2">Platform:</span> RevShare
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-coins text-red-600 mr-4 text-xl"></i>
+                        <span class="font-bold mr-2">Token Ticker:</span> $GLORY
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-file-contract text-red-600 mr-4 text-xl"></i>
+                        <span class="font-bold mr-2">Contract Address:</span> Coming Soon
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-exchange-alt text-red-600 mr-4 text-xl"></i>
+                        <span class="font-bold mr-2">DEX Listing:</span> Link on Launch
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <div class="flag-stripe"></div>
+    
+    <!-- Links Section -->
+    <section class="py-20 px-4 md:px-8 bg-gray-100">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 uppercase text-gray-800">🔗 Official Links</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://x.com/glorycoin_sol" class="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transform transition duration-300 hover:scale-105">
+                    <i class="fab fa-twitter mr-2"></i> Twitter
+                </a>
+                <a href="https://t.me/ReflectionsAndGlory" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transform transition duration-300 hover:scale-105">
+                    <i class="fab fa-telegram-plane mr-2"></i> Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final Message -->
+    <section class="py-20 px-4 md:px-8 bg-white relative">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 uppercase text-gray-800">🗣️ Final Words</h2>
+            <div class="relative">
+                <img src="https://i.ibb.co/JWm0TYDs/IMG-7-E250566700-C-1.jpg" alt="$GLORY Logo" class="mx-auto w-32 opacity-20 absolute inset-0 m-auto">
+                <div class="relative z-10">
+                    <p class="text-2xl md:text-3xl italic font-bold text-gray-800 mb-8">
+                        "They had 1776. We have 7/7. Let freedom reflect."
+                    </p>
+                    <div class="flex justify-center space-x-6 mt-12">
+                        <a href="https://x.com/glorycoin_sol" class="text-gray-600 hover:text-black text-2xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://t.me/ReflectionsAndGlory" class="text-gray-600 hover:text-blue-500 text-2xl">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="bg-gray-900 text-white py-8 px-4 text-center">
+        <p>© 2023 $GLORY. All rights reserved.</p>
+        <p class="text-gray-400 text-sm mt-2">This is not financial advice. Do your own research.</p>
+    </footer>
+    
+    <script>
+        // Create fireworks
+        function createFireworks() {
+            const container = document.getElementById('fireworks-container');
+            const colors = ['#ff0000', '#ffffff', '#0000ff', '#ffcc00', '#ff00ff'];
+            
+            for (let i = 0; i < 50; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                firework.style.left = `${Math.random() * 100}%`;
+                firework.style.top = `${Math.random() * 100}%`;
+                firework.style.setProperty('--tx', `${(Math.random() - 0.5) * 300}px`);
+                firework.style.setProperty('--ty', `${(Math.random() - 0.5) * 300}px`);
+                firework.style.color = colors[Math.floor(Math.random() * colors.length)];
+                firework.style.animationDelay = `${Math.random() * 3}s`;
+                firework.style.animationDuration = `${1 + Math.random() * 2}s`;
+                container.appendChild(firework);
+            }
+        }
+        
+        function createBalloons() {
+            const container = document.getElementById('balloons-container');
+            const colors = ['#092354', '#b71c1c', '#1a237e', '#ffffff', '#ffcc00'];
+            
+            for (let i = 0; i < 15; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.style.left = `${Math.random() * 100}%`;
+                balloon.style.top = `${20 + Math.random() * 60}%`;
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.setProperty('--start-x', `${(Math.random() - 0.5) * 50}px`);
+                balloon.style.setProperty('--start-y', `${(Math.random() - 0.5) * 50}px`);
+                balloon.style.setProperty('--mid-x', `${(Math.random() - 0.5) * 100}px`);
+                balloon.style.setProperty('--mid-y', `${-30 + (Math.random() - 0.5) * 40}px`);
+                balloon.style.animationDelay = `${Math.random() * 5}s`;
+                balloon.style.animationDuration = `${8 + Math.random() * 7}s`;
+                
+                balloon.addEventListener('click', () => {
+                    balloon.style.animation = 'none';
+                    balloon.style.transform = 'translateY(-1000px) rotate(360deg)';
+                    balloon.style.opacity = '0';
+                    setTimeout(() => balloon.remove(), 1000);
+                });
+                
+                container.appendChild(balloon);
+            }
+        }
+        
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            createFireworks();
+            createBalloons();
+        });
+    </script>
+</body>
+</html>
